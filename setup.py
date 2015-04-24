@@ -32,9 +32,9 @@ setup(name='bika.veterinary',
       install_requires=[
           'setuptools',
           # -*- Extra requirements: -*-
-          'bika.lims<=3.1.7',
           'bika.health<=3.1.6',
           'archetypes.schemaextender',
+          'z3c.unconfigure == 1.0.1',
       ],
       extras_require={
           'test': [
