@@ -7,7 +7,7 @@
       name="default"
       title="Bika Veterinary"
       directory="profiles/default"
-      description='Extension fo Bika Health LIS to use in veterinary laboratories'
+      description='Extension for Bika Health LIS to use in veterinary laboratories'
       provides="Products.GenericSetup.interfaces.EXTENSION"/>
 
   <genericsetup:importStep
