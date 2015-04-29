@@ -7,4 +7,9 @@
     xmlns:zcml="http://namespaces.zope.org/zcml"
     i18n_domain="bika.veterinary">
 
+    <include package="archetypes.schemaextender" />
+
+    <adapter factory=".patient.PatientSchemaExtender" />
+    <adapter factory=".patient.PatientSchemaModifier" />
+
 </configure>
