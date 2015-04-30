@@ -8,4 +8,10 @@
       factory="bika.veterinary.setupdata.SetupDataSetList"
       provides="bika.lims.interfaces.ISetupDataSetList"/>
 
+    <adapter
+      name="Specimen"
+      factory="bika.veterinary.setupdata.Specimen"
+      provides="bika.lims.interfaces.ISetupDataImporter"
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"/>
+
 </configure>
