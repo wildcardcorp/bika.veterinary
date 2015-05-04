@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<object name="portal_javascripts" meta_type="JavaScripts Registry">
+
+  <!-- Add javascripts ALWAYS BEFORE this one -->
+  <javascript authenticated="True"
+              id="++resource++bika.veterinary.js/bika.veterinary.loader.js"
+              cacheable="True"
+              compression="safe"
+              conditionalcomment=""
+              cookable="True"
+              enabled="on"
+              expression=""
+              inline="False"
+              insert-after="*"/>
+
+</object>

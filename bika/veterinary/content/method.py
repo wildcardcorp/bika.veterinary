@@ -4,9 +4,7 @@ from archetypes.schemaextender.interfaces import IOrderableSchemaExtender, ISche
 from Products.Archetypes.Widget import BooleanWidget, StringWidget
 from bika.veterinary import bikaMessageFactory as _
 from bika.lims import fields
-from bika.lims.content.method import schema
 from bika.lims.interfaces import IMethod
-from plone.indexer.decorator import indexer
 
 
 class MethodSchemaExtender(object):
@@ -22,8 +20,6 @@ class MethodSchemaExtender(object):
                 visible={'view': 'visible', 'edit': 'visible'},
                 label=_('Method ID'),
                 description=_('Define an identifier code for the method. It must be unique.'),
-                css='readonly-emphasize',
-                helper_js=[]
             ),
         ),
         fields.ExtBooleanField('Accredited',
@@ -31,7 +27,7 @@ class MethodSchemaExtender(object):
             default=True,
             widget=BooleanWidget(
                 label=_("Accredited"),
-                description=_("Check is the method is accredited"))
+                description=_("Check if the method has been accredited"))
         ),
     ]
 

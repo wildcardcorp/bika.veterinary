@@ -1,0 +1,15 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    i18n_domain="bika">
+
+  <genericsetup:upgradeStep
+    title="Bika Veterinary 1.0"
+    description=""
+    source="*"
+    destination="010"
+    handler="bika.veterinary.upgrade.to010.upgrade"
+    sortkey="1"
+    profile="bika.veterinary:default"/>
+
+</configure>
