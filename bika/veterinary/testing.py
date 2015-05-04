@@ -18,12 +18,13 @@ import plone.app.iterate
 from bika.lims.exportimport.load_setup_data import LoadSetupData
 
 
-class BikaTestLayer(PloneSandboxLayer):
+class BikaVeterinaryTestLayer(PloneSandboxLayer):
 
     defaultBases = (PLONE_FIXTURE,)
 
     def setUpZope(self, app, configurationContext):
         import bika.lims
+        import bika.health
         import bika.veterinary
         import archetypes.schemaextender
         # Load ZCML
@@ -32,11 +33,13 @@ class BikaTestLayer(PloneSandboxLayer):
         self.loadZCML(package=collective.js.jqueryui)
         self.loadZCML(package=archetypes.schemaextender)
         self.loadZCML(package=bika.lims)
+        self.loadZCML(package=bika.health)
         self.loadZCML(package=bika.veterinary)
 
         # Required by Products.CMFPlone:plone-content
         z2.installProduct(app, 'Products.PythonScripts')
-        z2.installProduct(app, 'bika.lims')
+        # z2.installProduct(app, 'bika.lims')
+        # z2.installProduct(app, 'bika.health')
         z2.installProduct(app, 'bika.veterinary')
 
     def setUpPloneSite(self, portal):
@@ -52,6 +55,7 @@ class BikaTestLayer(PloneSandboxLayer):
             default_view='folder_listing')
 
         applyProfile(portal, 'bika.lims:default')
+        applyProfile(portal, 'bika.health:default')
         applyProfile(portal, 'bika.veterinary:default')
 
         # Add some test users
@@ -98,7 +102,12 @@ class BikaTestLayer(PloneSandboxLayer):
 
         logout()
 
-VETERINARY_TEST_FIXTURE = BikaTestLayer()
+VETERINARY_TEST_FIXTURE = BikaVeterinaryTestLayer()
+
+VETERINARY_FUNCTIONAL_TESTING = FunctionalTesting(
+    bases=(VETERINARY_TEST_FIXTURE,),
+    name="VeterinaryTestingLayer:Functional"
+)
 
 BIKA_VETERINARY_TESTING = FunctionalTesting(
     bases=(VETERINARY_TEST_FIXTURE, z2.ZSERVER_FIXTURE),
