@@ -24,19 +24,19 @@ class Specimen(WorksheetImporter):
         folder = self.context.patients
         rows = self.get_rows(3)
         for row in rows:
-            if not row['Firstname'] or not row['VeterinaryCenter']:
+            if not row.get('Firstname', None) or not row.get('VeterinaryCenter', None):
                 continue
             pc = getToolByName(self.context, 'portal_catalog')
-            veterinarycenter = pc(portal_type='Client', Title=row['VeterinaryCenter'])
+            veterinarycenter = pc(portal_type='Client', Title=row.get('VeterinaryCenter', ''))
             if len(veterinarycenter) == 0:
-                raise IndexError("Veterinary Center invalid: '%s'" % row['VeterinaryCenter'])
+                raise IndexError("Veterinary Center invalid: '%s'" % row.get('VeterinaryCenter', 'VeterinaryCenter'))
 
             veterinarycenter = veterinarycenter[0].getObject()
             _id = folder.invokeFactory('Patient', id=tmpID())
             obj = folder[_id]
             obj.unmarkCreationFlag()
             renameAfterCreation(obj)
-            Fullname = (row['Firstname'] + " " + row.get('Surname', '')).strip()
+            Fullname = (row.get('Firstname', '') + " " + row.get('Surname', '')).strip()
             obj.edit(PatientID=row.get('PatientID'),
                      title=Fullname,
                      ClientPatientID=row.get('ClientPatientID', ''),
@@ -55,7 +55,7 @@ class Specimen(WorksheetImporter):
                      )
             self.fill_contactfields(row, obj)
             self.fill_addressfields(row, obj)
-            if 'Photo' in row and row['Photo']:
+            if 'Photo' in row and row.get('Photo', None):
                 try:
                     path = resource_filename("bika.lims",
                                              "setupdata/%s/%s" \
@@ -63,17 +63,17 @@ class Specimen(WorksheetImporter):
                     file_data = open(path, "rb").read()
                     obj.setPhoto(file_data)
                 except:
-                    logger.error("Unable to load Photo %s"%row['Photo'])
+                    logger.error("Unable to load Photo %s"%row.get('Photo', 'Photo'))
 
-            if 'Feature' in row and row['Feature']:
+            if 'Feature' in row and row.get('Feature', None):
                 try:
                     path = resource_filename("bika.lims",
                                              "setupdata/%s/%s" \
-                                             % (self.dataset_name, row['Feature']))
+                                             % (self.dataset_name, row.get('Feature', None)))
                     file_data = open(path, "rb").read()
                     obj.setFeature(file_data)
                 except:
-                    logger.error("Unable to load Feature %s"%row['Feature'])
+                    logger.error("Unable to load Feature %s"%row.get('Feature', 'Photo'))
 
             obj.unmarkCreationFlag()
             transaction.savepoint(optimistic=True)
