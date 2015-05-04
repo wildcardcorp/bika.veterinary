@@ -1,5 +1,6 @@
 from pkg_resources import resource_filename
 from Products.CMFCore.utils import getToolByName
+from Products.CMFPlone.utils import _createObjectByType
 from bika.lims import logger
 from bika.lims.exportimport.dataimport import SetupDataSetList as SDL
 from bika.lims.exportimport.setupdata import WorksheetImporter
@@ -81,4 +82,40 @@ class Specimen(WorksheetImporter):
                 # To maintain the patient spreadsheet's IDs, we cannot do a 'renameaftercreation()'
                 obj.aq_inner.aq_parent.manage_renameObject(obj.id, row.get('PatientID'))
             else:
+                renameAfterCreation(obj)
+
+
+class Methods(WorksheetImporter):
+
+    def Import(self):
+        folder = self.context.methods
+        for row in self.get_rows(3):
+            if row.get('title', None):
+                obj = _createObjectByType("Method", folder, tmpID())
+
+                obj.edit(
+                    title=row['title'],
+                    description=row.get('description', ''),
+                    Instructions=row.get('Instructions', ''),
+                    MethodID=row.get('MethodID', ''),
+                    Accredited=row.get('Accredited', True),
+                    )
+                # Obtain all created methods
+                catalog = getToolByName(self.context, 'portal_catalog')
+                methods_brains = catalog.searchResults({'portal_type': 'Method'})
+                # If a the new method has the same MethodID as a created method, remove MethodID value.
+                for methods in methods_brains:
+                    if methods.getObject().get('MethodID', '') != '' and methods.getObject.get('MethodID', '') == obj['MethodID']:
+                        obj.edit(MethodID='')
+
+                if row.get('MethodDocument', None):
+                    path = resource_filename(
+                        self.dataset_project,
+                        "setupdata/%s/%s" % (self.dataset_name,
+                                             row['MethodDocument'])
+                    )
+                    file_data = open(path, "rb").read()
+                    obj.setMethodDocument(file_data)
+
+                obj.unmarkCreationFlag()
                 renameAfterCreation(obj)

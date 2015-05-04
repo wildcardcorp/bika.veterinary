@@ -26,6 +26,13 @@ class BikaVeterinaryGenerator:
                 logger.warning("Could not create metadata %s in catalog %s" %
                                (col, cat))
 
+        # bika_catalog
+        bc = getToolByName(portal, 'bika_catalog', None)
+        if bc == None:
+            logger.warning('Could not find the bika_catalog tool.')
+            return
+        addIndex(bc, 'getMethodID', 'FieldIndex')
+
         bsc = getToolByName(portal, 'bika_catalog', None)
         if bsc is None:
             logger.warning('Could not find the bika_catalog tool.')
