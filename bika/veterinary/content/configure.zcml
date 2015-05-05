@@ -12,6 +12,4 @@
     <adapter factory=".patient.PatientSchemaExtender" />
     <adapter factory=".patient.PatientSchemaModifier" />
 
-    <adapter factory=".supplier.SupplierSchemaExtender" />
-
 </configure>

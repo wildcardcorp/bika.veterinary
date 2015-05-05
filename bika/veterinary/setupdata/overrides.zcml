@@ -2,10 +2,4 @@
     xmlns="http://namespaces.zope.org/zope"
     xmlns:browser="http://namespaces.zope.org/browser">
 
-    <adapter
-      name="Suppliers"
-      factory="bika.veterinary.setupdata.Suppliers"
-      provides="bika.lims.interfaces.ISetupDataImporter"
-      for="Products.CMFPlone.interfaces.IPloneSiteRoot"/>
-
 </configure>
