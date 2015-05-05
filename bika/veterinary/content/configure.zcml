@@ -12,4 +12,7 @@
     <adapter factory=".patient.PatientSchemaExtender" />
     <adapter factory=".patient.PatientSchemaModifier" />
 
+    <adapter factory=".method.MethodSchemaExtender" />
+    <adapter factory=".method.MethodSchemaModifier" />
+
 </configure>

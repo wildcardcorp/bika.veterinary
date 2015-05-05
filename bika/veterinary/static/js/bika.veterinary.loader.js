@@ -12,6 +12,8 @@ var _s = window.jarn.i18n.MessageFactory("bika.veterinary");
  * following the order of the dictionary.
  */
 window.bika.veterinary.controllers =  {
+    ".portaltype-method.template-base_edit":
+        ['VeterinaryAddMethod']
 
 };
 
@@ -23,9 +25,9 @@ window.bika.veterinary.initialized = false;
  * dict to be load together.
  */
 window.bika.veterinary.initialize = function() {
-    if (bika.lims.initialized == true && bika.health.initialized) {
+    if (bika.lims.initialized==true && bika.health.initialized==true) {
         // Using only lims and veterinary because window.bika.lims.controllers was extended on health
-        window.bika.lims.controllers = $.extend(window.bika.lims.controllers, window.bika.veterinary.controllers);
+        window.bika.lims.controllers = $.extend(window.bika.lims.controllers, window.bika.health.controllers,window.bika.veterinary.controllers);
         // We need to force bika.lims.loader to load the bika.veterinary controllers.
         return window.bika.lims.initview();
     }
