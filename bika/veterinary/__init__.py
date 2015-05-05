@@ -21,7 +21,6 @@ from bika.veterinary.permissions import *
 
 def initialize(context):
     """Initializer called when used as a Zope 2 product."""
-    #from content import bikaschema
     # It generates the content types, the constructors and the Factory-based
     # Type Informations required to make your types work with the CMF
     content_types, constructors, ftis = process_types(
