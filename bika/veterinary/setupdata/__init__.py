@@ -119,3 +119,29 @@ class Methods(WorksheetImporter):
 
                 obj.unmarkCreationFlag()
                 renameAfterCreation(obj)
+
+
+class Suppliers(WorksheetImporter):
+
+    def Import(self):
+        folder = self.context.bika_setup.bika_suppliers
+        for row in self.get_rows(3):
+            obj = _createObjectByType("Supplier", folder, tmpID())
+            if row.get('Name', None):
+                obj.edit(
+                    Name=row.get('Name', ''),
+                    TaxNumber=row.get('TaxNumber', ''),
+                    AccountType=row.get('AccountType', {}),
+                    AccountName=row.get('AccountName', {}),
+                    AccountNumber=row.get('AccountNumber', ''),
+                    BankName=row.get('BankName', ''),
+                    BankBranch=row.get('BankBranch', ''),
+                    SWIFTcode=row.get('SWIFTcode', ''),
+                    IBN=row.get('IBN', ''),
+                    NIB=row.get('NIB', ''),
+                    Website=row.get('Website', ''),
+                )
+                self.fill_contactfields(row, obj)
+                self.fill_addressfields(row, obj)
+                obj.unmarkCreationFlag()
+                renameAfterCreation(obj)
