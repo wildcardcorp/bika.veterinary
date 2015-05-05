@@ -12,8 +12,6 @@ var _s = window.jarn.i18n.MessageFactory("bika.veterinary");
  * following the order of the dictionary.
  */
 window.bika.veterinary.controllers =  {
-    ".portaltype-method.template-base_edit":
-        ['VeterinaryAddMethod']
 
 };
 

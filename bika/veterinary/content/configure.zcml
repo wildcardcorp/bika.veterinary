@@ -15,4 +15,6 @@
     <adapter factory=".method.MethodSchemaExtender" />
     <adapter factory=".method.MethodSchemaModifier" />
 
+    <adapter factory=".supplier.SupplierSchemaExtender" />
+
 </configure>
