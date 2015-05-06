@@ -38,6 +38,14 @@ class Specimen(WorksheetImporter):
             obj.unmarkCreationFlag()
             renameAfterCreation(obj)
             Fullname = (row.get('Firstname', '') + " " + row.get('Surname', '')).strip()
+            identifiers = []
+            if row.get('UELN', '') != '':
+                identifiers.append({'IdentifierType': 'UEALN', 'Identifier': row.get('UELN', '')})
+            if row.get('TransponderID', '') != '':
+                identifiers.append({'IdentifierType': 'TransponderID', 'Identifier': row.get('TransponderID', '')})
+            if row.get('NationalID', '') != '':
+                identifiers.append({'IdentifierType': 'NationalID', 'Identifier': row.get('NationalID', '')})
+
             obj.edit(PatientID=row.get('PatientID'),
                      title=Fullname,
                      ClientPatientID=row.get('ClientPatientID', ''),
@@ -49,10 +57,12 @@ class Specimen(WorksheetImporter):
                      BirthDate=row.get('BirthDate', ''),
                      BirthDateEstimated =self.to_bool(row.get('BirthDateEstimated', 'False')),
                      BirthPlace=row.get('BirthPlace', ''),
+                     MothersName=row.get('MothersName', ''),
+                     FathersName=row.get('FathersName', ''),
                      Breed=row.get('Breed', ''),
                      CoatColour=row.get('CoatColour', ''),
-                     UEALN=row.get('UELN', ''),
-                     Breeder=row.get('Breeder', '')
+                     Breeder=row.get('Breeder', ''),
+                     PatientIdentifiers=identifiers
                      )
             self.fill_contactfields(row, obj)
             self.fill_addressfields(row, obj)
