@@ -28,24 +28,6 @@ class PatientSchemaExtender(object):
                     label=_('Coat Colour'),
                 ),
         ),
-        fields.ExtStringField('Transponder',
-                searchable=1,
-                required=0,
-                widget=StringWidget(
-                    description="Implanted transponder ID",
-                    visible={'view': 'visible', 'edit': 'visible'},
-                    label=_('Transponder'),
-                ),
-        ),
-        fields.ExtStringField('UELN',
-                searchable=1,
-                required=0,
-                widget=StringWidget(
-                    description="Universal Equine Life Number",
-                    visible={'view': 'visible', 'edit': 'visible'},
-                    label=_('UELN'),
-                ),
-        ),
         fields.ExtStringField('Breeder',
                 searchable=1,
                 required=0,
@@ -89,7 +71,6 @@ class PatientSchemaModifier(object):
         schema['ChronicConditions'].widget.description = _("Specimen's past medical history.")
         schema['Ethnicity'].widget.visible = False
         schema['Citizenship'].widget.visible = False
-        schema['MothersName'].widget.visible = False
         schema['CivilStatus'].widget.visible = False
         schema['MenstrualStatus'].widget.visible = False
         schema['CivilStatus'].widget.visible = False
