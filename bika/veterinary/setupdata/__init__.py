@@ -25,14 +25,14 @@ class Specimen(WorksheetImporter):
         folder = self.context.patients
         rows = self.get_rows(3)
         for row in rows:
-            if not row.get('Firstname', None) or not row.get('VeterinaryCenter', None):
+            if not row.get('Firstname', None) or not row.get('Client', None):
                 continue
             pc = getToolByName(self.context, 'portal_catalog')
-            veterinarycenter = pc(portal_type='Client', Title=row.get('VeterinaryCenter', ''))
-            if len(veterinarycenter) == 0:
-                raise IndexError("Veterinary Center invalid: '%s'" % row.get('VeterinaryCenter', 'VeterinaryCenter'))
+            client = pc(portal_type='Client', Title=row.get('Client', ''))
+            if len(client) == 0:
+                raise IndexError("Client invalid: '%s'" % row.get('Client', 'Client'))
 
-            veterinarycenter = veterinarycenter[0].getObject()
+            client = client[0].getObject()
             _id = folder.invokeFactory('Patient', id=tmpID())
             obj = folder[_id]
             obj.unmarkCreationFlag()
@@ -51,7 +51,7 @@ class Specimen(WorksheetImporter):
                      ClientPatientID=row.get('ClientPatientID', ''),
                      Firstname=row.get('Firstname', ''),
                      Surname=row.get('Surname', ''),
-                     PrimaryReferrer=veterinarycenter.UID(),
+                     PrimaryReferrer=client.UID(),
                      Gender=row.get('Gender', 'dk'),
                      Age=row.get('Age', ''),
                      BirthDate=row.get('BirthDate', ''),
