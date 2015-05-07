@@ -37,7 +37,7 @@ class Specimen(WorksheetImporter):
             obj = folder[_id]
             obj.unmarkCreationFlag()
             renameAfterCreation(obj)
-            Fullname = (row.get('Firstname', '') + " " + row.get('Surname', '')).strip()
+            Fullname = (str(row.get('Firstname', '')) + " " + str(row.get('Surname', ''))).strip()
             identifiers = []
             if row.get('UELN', '') != '':
                 identifiers.append({'IdentifierType': 'UEALN', 'Identifier': row.get('UELN', '')})
