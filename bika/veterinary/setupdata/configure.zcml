@@ -9,8 +9,8 @@
       provides="bika.lims.interfaces.ISetupDataSetList"/>
 
     <adapter
-      name="Specimen"
-      factory="bika.veterinary.setupdata.Specimen"
+      name="Patient"
+      factory="bika.veterinary.setupdata.Patient"
       provides="bika.lims.interfaces.ISetupDataImporter"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"/>
 

@@ -19,7 +19,7 @@ class SetupDataSetList(SDL):
         return SDL.__call__(self, projectname="bika.veterinary")
 
 
-class Specimen(WorksheetImporter):
+class Patient(WorksheetImporter):
 
     def Import(self):
         folder = self.context.patients
