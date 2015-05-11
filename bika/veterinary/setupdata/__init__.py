@@ -19,25 +19,33 @@ class SetupDataSetList(SDL):
         return SDL.__call__(self, projectname="bika.veterinary")
 
 
-class Specimen(WorksheetImporter):
+class Patient(WorksheetImporter):
 
     def Import(self):
         folder = self.context.patients
         rows = self.get_rows(3)
         for row in rows:
-            if not row.get('Firstname', None) or not row.get('VeterinaryCenter', None):
+            if not row.get('Firstname', None) or not row.get('Client', None):
                 continue
             pc = getToolByName(self.context, 'portal_catalog')
-            veterinarycenter = pc(portal_type='Client', Title=row.get('VeterinaryCenter', ''))
-            if len(veterinarycenter) == 0:
-                raise IndexError("Veterinary Center invalid: '%s'" % row.get('VeterinaryCenter', 'VeterinaryCenter'))
+            client = pc(portal_type='Client', Title=row.get('Client', ''))
+            if len(client) == 0:
+                raise IndexError("Client invalid: '%s'" % row.get('Client', 'Client'))
 
-            veterinarycenter = veterinarycenter[0].getObject()
+            client = client[0].getObject()
+
+            # Getting an existing breed
+            bsc = getToolByName(self.context, 'bika_setup_catalog')
+            breed = bsc(portal_type='Ethnicity', Title=row.get('Breed', ''))
+            if len(breed) == 0:
+                raise IndexError("Invalid breed: '%s'" % row['Breed'])
+            breed = breed[0].getObject()
+
             _id = folder.invokeFactory('Patient', id=tmpID())
             obj = folder[_id]
             obj.unmarkCreationFlag()
             renameAfterCreation(obj)
-            Fullname = (row.get('Firstname', '') + " " + row.get('Surname', '')).strip()
+            Fullname = (str(row.get('Firstname', '')) + " " + str(row.get('Surname', ''))).strip()
             identifiers = []
             if row.get('UELN', '') != '':
                 identifiers.append({'IdentifierType': 'UEALN', 'Identifier': row.get('UELN', '')})
@@ -51,7 +59,7 @@ class Specimen(WorksheetImporter):
                      ClientPatientID=row.get('ClientPatientID', ''),
                      Firstname=row.get('Firstname', ''),
                      Surname=row.get('Surname', ''),
-                     PrimaryReferrer=veterinarycenter.UID(),
+                     PrimaryReferrer=client.UID(),
                      Gender=row.get('Gender', 'dk'),
                      Age=row.get('Age', ''),
                      BirthDate=row.get('BirthDate', ''),
@@ -59,7 +67,7 @@ class Specimen(WorksheetImporter):
                      BirthPlace=row.get('BirthPlace', ''),
                      MothersName=row.get('MothersName', ''),
                      FathersName=row.get('FathersName', ''),
-                     Breed=row.get('Breed', ''),
+                     Ethnicity=breed.UID(),
                      CoatColour=row.get('CoatColour', ''),
                      Breeder=row.get('Breeder', ''),
                      PatientIdentifiers=identifiers
