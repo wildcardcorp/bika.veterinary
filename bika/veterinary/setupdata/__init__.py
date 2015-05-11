@@ -33,6 +33,14 @@ class Specimen(WorksheetImporter):
                 raise IndexError("Client invalid: '%s'" % row.get('Client', 'Client'))
 
             client = client[0].getObject()
+
+            # Getting an existing breed
+            bsc = getToolByName(self.context, 'bika_setup_catalog')
+            breed = bsc(portal_type='Ethnicity', Title=row.get('Breed', ''))
+            if len(breed) == 0:
+                raise IndexError("Invalid breed: '%s'" % row['Breed'])
+            breed = breed[0].getObject()
+
             _id = folder.invokeFactory('Patient', id=tmpID())
             obj = folder[_id]
             obj.unmarkCreationFlag()
@@ -59,7 +67,7 @@ class Specimen(WorksheetImporter):
                      BirthPlace=row.get('BirthPlace', ''),
                      MothersName=row.get('MothersName', ''),
                      FathersName=row.get('FathersName', ''),
-                     Breed=row.get('Breed', ''),
+                     Ethnicity=breed.UID(),
                      CoatColour=row.get('CoatColour', ''),
                      Breeder=row.get('Breeder', ''),
                      PatientIdentifiers=identifiers
