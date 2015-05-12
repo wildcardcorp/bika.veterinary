@@ -11,10 +11,10 @@
       provides="Products.GenericSetup.interfaces.EXTENSION"/>
 
   <genericsetup:importStep
-      name="setupVeterinaryVarious"
+      name="bika.veterinary"
       title="Bika Veterinary: Various custom python setup actions"
       description="Final site configuration actions"
-      handler="bika.veterinary.setuphandlers.setupVeterinaryVarious">
+      handler=".setuphandlers.setupVeterinaryVarious">
     <depends name="content" />
     <depends name="toolset" />
   </genericsetup:importStep>

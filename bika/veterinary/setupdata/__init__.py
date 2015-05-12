@@ -67,7 +67,8 @@ class Patient(WorksheetImporter):
                      BirthPlace=row.get('BirthPlace', ''),
                      MothersName=row.get('MothersName', ''),
                      FathersName=row.get('FathersName', ''),
-                     Ethnicity=breed.UID(),
+                     # TODO Ethnicity_Obj -> Ethnicity on health v319
+                     Ethnicity_Obj=breed.UID(),
                      CoatColour=row.get('CoatColour', ''),
                      Breeder=row.get('Breeder', ''),
                      PatientIdentifiers=identifiers

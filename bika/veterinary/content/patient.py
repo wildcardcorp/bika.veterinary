@@ -51,7 +51,8 @@ class PatientSchemaModifier(object):
         schema['Salutation'].widget.visible = False
         schema['Middleinitial'].widget.visible = False
         schema['PrimaryReferrer'].widget.label = _("Client")
-        schema['Ethnicity'].widget.label = _('Breed')
+        # TODO on next health release, Ethnicity_Obj -> Ethnicity
+        schema['Ethnicity_Obj'].widget.label = _('Breed')
         schema['Citizenship'].widget.visible = False
         schema['CivilStatus'].widget.visible = False
         schema['MenstrualStatus'].widget.visible = False
