@@ -51,6 +51,20 @@ class BikaVeterinaryGenerator:
         # Add indexes and metadata colums here
 
 
+def removeHealthEthnicities(portal):
+    """
+    Removing health ethnicities since they are focused on people instead of animals
+    """
+    # Getting all ethnicities
+    bika_setup = portal._getOb('bika_setup')
+    folder = bika_setup.bika_ethnicities
+    ids = folder.keys()
+    if len(ids) > 0:
+        # manage_delObject will mutate the list
+        ids = list(ids)
+        folder.manage_delObjects(ids)
+    logger.info("Health standard ethnicities removed")
+
 
 def setupVeterinaryVarious(context):
     """ Setup Bika site structure """
@@ -62,3 +76,4 @@ def setupVeterinaryVarious(context):
 
     gen = BikaVeterinaryGenerator()
     gen.setupCatalogs(portal)
+    removeHealthEthnicities(portal)
