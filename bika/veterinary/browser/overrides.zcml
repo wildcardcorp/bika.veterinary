@@ -5,5 +5,11 @@
            xmlns:five="http://namespaces.zope.org/five">
 
     <include file="analysisrequest/overrides.zcml" />
-
+    <browser:menuItem
+        for="Products.CMFCore.interfaces.ISiteRoot"
+        menu="plone_displayviews"
+        title="Bika Veterinary front-page"
+        action="bika-frontpage"
+        description="Bika Veterinary front-page"
+    />
 </configure>

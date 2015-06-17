@@ -4,11 +4,3 @@ from Products.Archetypes.public import DisplayList
 
 # Setting project name
 PROJECTNAME = "bika.veterinary"
-
-# Specifying the gender options using the DisplayList utility class that Archetypes has provided
-# for exactly that purpose
-GENDERS = DisplayList((
-    ('male', _('Male')),
-    ('female', _('Female')),
-    ('dk', _("Don't Know")),
-    ))
