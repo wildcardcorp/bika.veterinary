@@ -96,9 +96,10 @@ class Patient(WorksheetImporter):
                     logger.error("Unable to load Feature %s"%row.get('Feature', 'Photo'))
 
             obj.unmarkCreationFlag()
-            transaction.savepoint(optimistic=True)
             if row.get('PatientID'):
                 # To maintain the patient spreadsheet's IDs, we cannot do a 'renameaftercreation()'
-                obj.aq_inner.aq_parent.manage_renameObject(obj.id, row.get('PatientID'))
+                if obj.getPatientID() != row.get('PatientID'):
+                    transaction.savepoint(optimistic=True)
+                    obj.aq_inner.aq_parent.manage_renameObject(obj.id, row.get('PatientID'))
             else:
                 renameAfterCreation(obj)
