@@ -29,6 +29,6 @@
   <browser:resource
      file="static/images/logo_vet.png"
      name="bika-veterinary-logo.png"
-     />
+  />
 
 </configure>

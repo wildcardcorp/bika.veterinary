@@ -3,11 +3,10 @@ Bika Veterinary
 
 Bika Laboratory Information Management System customized for use in veterinary laboratories.
 
-Last stable version: **0.1** · released: in production
+No stable release available yet. **Under development**
 
 Installation and upgrades
 -------------------------
-
 Bika Veterinary can be installed on Windows, Mac OS X, Linux, BSD and other platforms:
 https://github.com/naralabs/bika.veterinary/wiki/Installing-Bika-Veterinary-Extension
 

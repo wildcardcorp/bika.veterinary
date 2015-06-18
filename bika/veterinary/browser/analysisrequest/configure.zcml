@@ -4,13 +4,13 @@
            xmlns:browser="http://namespaces.zope.org/browser"
            xmlns:plone="http://namespaces.plone.org/plone"
            xmlns:five="http://namespaces.zope.org/five"
-  i18n_domain="bika.custm">
+           i18n_domain="bika.veterinary">
 
-  <include package="plone.resource" file="meta.zcml"/>
-  <plone:static
-       directory="templates/reports"
-       type="reports"
-       name="veterinary"
-   />
+    <include package="plone.resource" file="meta.zcml"/>
+    <plone:static
+        directory="templates/reports"
+        type="reports"
+        name="bika.veterinary"
+    />
 
 </configure>
