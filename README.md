@@ -12,10 +12,6 @@ https://github.com/naralabs/bika.veterinary/wiki/Installing-Bika-Veterinary-Exte
 
 This packaged depends on Bika Health, and consequently on Bika LIMS.
 
-**Bika Veterinary 0.1 is only compatible with Bika LIMS 3.1.8**. Follow the instructions [Installing Bika Health Extension](https://github.com/bikalabs/bika.health/wiki/Installing-Bika-Health-Extension).
-
-**Bika Veterinary 0.1 is only compatible with Bika Health 3.1.7**. Follow the instructions [Installing Bika Veterinary Extension](https://github.com/naralabs/bika.veterinary/wiki/Installing-Bika-Veternary-Extension).
-
 You might also find useful the following recipes:
 
 - [Installing Bika LIMS](https://github.com/bikalabs/Bika-LIMS/wiki/Bika-LIMS-Installation)
