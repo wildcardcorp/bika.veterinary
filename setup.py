@@ -31,7 +31,7 @@ setup(name='bika.veterinary',
       include_package_data=True,
       zip_safe=False,
       install_requires=[
-          'bika.health == 3.1.7',
+          'bika.health<3.2',
       ],
       extras_require={
           'test': [
